@@ -55,10 +55,11 @@ public class Client {
 //        }
 
            // open & read file to send to server 1460 buffer size 
-           File file = new File("D:/Downloads/Setup_Yulgang13.77.zip");
+           File file = new File("D:/Downloads/calture.pdf");
+           out.writeUTF(file.getName());  // send file name to server
            int bufferSize = 1460;
            try (FileInputStream fis = new FileInputStream(file)) {
-               byte [] buf;
+               byte [] buf;   
                MessageDigest md = MessageDigest.getInstance("MD5");  // create MD5 Instance
                while ((fis.available()) != 0){  // if file is not empty
                 int length = fis.available();  // file size
@@ -74,7 +75,8 @@ public class Client {
                 byte [] digest = md.digest();  // Completes the hash computation
                 String myHash = DatatypeConverter
                     .printHexBinary(digest).toUpperCase();  // Converts an array of bytes into a string.
-               System.out.println("Send file complete");
+                
+               System.out.println("Send file " + file.getName() + " complete");
                System.out.println("MD5 is " + myHash);  // Display MD5 Checksum
            } catch (IOException e) {
                 e.printStackTrace();
