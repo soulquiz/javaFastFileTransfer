@@ -68,7 +68,8 @@ public class GreetingServer extends Thread {
             
             
             //open file to write data form client 1460 buffer size
-           File file = new File("D:/Downloads/game.zip");
+           String fileName = in.readUTF();  // get file name from client 
+           File file = new File("D:/Downloads/output/" + fileName);
            int bufferSize = 1460;
            try (FileOutputStream fop = new FileOutputStream(file)) {        
                 // if file doesn't exists, then create it
@@ -102,12 +103,13 @@ public class GreetingServer extends Thread {
                     .printHexBinary(digest).toUpperCase();  // Converts an array of bytes into a string.
                 System.out.println("Done");
                 System.out.println("MD5 is " + myHash);  // Display MD5 Checksum
+//                System.out.println(in.readUTF());
            } catch (IOException e) {
                 e.printStackTrace();
            } catch (NoSuchAlgorithmException ex) {
                  Logger.getLogger(GreetingServer.class.getName()).log(Level.SEVERE, null, ex);
              }
-           System.out.println("Receive file complete");
+           System.out.println("Receive file " + fileName + " complete");
            // end 1460 buffer size
            
            
